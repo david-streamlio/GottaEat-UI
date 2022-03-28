@@ -1,4 +1,4 @@
-package com.gottaeat.microservices.common.beans;
+package com.gottaeat.commons.beans;
 
 import io.smallrye.config.ConfigMapping;
 import io.smallrye.config.WithDefault;

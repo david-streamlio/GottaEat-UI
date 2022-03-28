@@ -1,4 +1,4 @@
-package com.gottaeat.microservices.location.analytics.driver.domain;
+package com.gottaeat.microservices.location.driver.domain;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -20,6 +20,12 @@ public class DriverLocation {
     public String gridId;
 
     public DriverLocation() {
+    }
 
+    public DriverLocation(DriverPositionSignal signal) {
+        this.latitude = signal.latitude;
+        this.longitude = signal.longitude;
+        this.driverId = signal.driverId;
+        this.timestamp = signal.timestamp;
     }
 }
