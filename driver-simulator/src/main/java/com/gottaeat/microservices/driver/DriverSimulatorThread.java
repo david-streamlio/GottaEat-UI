@@ -1,4 +1,4 @@
-package io.streamnative.driver;
+package com.gottaeat.microservices.driver;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gottaeat.microservices.location.driver.domain.DriverPositionSignal;
@@ -23,13 +23,15 @@ public class DriverSimulatorThread implements Runnable {
     private final Logger LOGGER = LoggerFactory.getLogger(DriverSimulatorThread.class);
 
     final Random rnd = new Random();
-    private ObjectMapper mapper = new ObjectMapper();
+    final ObjectMapper mapper = new ObjectMapper();
 
+    final String webServiceEndpoint;
     final int reportInterval;
     final long driverId;
     final DriverPositionSignal START;
 
-    public DriverSimulatorThread(int interval, long driverId, float lat, float lon) {
+    public DriverSimulatorThread(String webServiceEndpoint, int interval, long driverId, float lat, float lon) {
+        this.webServiceEndpoint = webServiceEndpoint;
         this.reportInterval = interval;
         this.driverId = driverId;
         this.START = new DriverPositionSignal(lat, lon, System.currentTimeMillis(), 0);
@@ -55,9 +57,13 @@ public class DriverSimulatorThread implements Runnable {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
 
             StringEntity entity = new StringEntity(mapper.writeValueAsString(signal), ContentType.APPLICATION_JSON);
-            HttpPost httpPost = new HttpPost("http://localhost:8080/location/driver");
+            HttpPost httpPost = new HttpPost(webServiceEndpoint);
             httpPost.setEntity(entity);
             HttpResponse response = httpClient.execute(httpPost);
+
+            if (response.getCode() > 400) {
+                LOGGER.error("Response code " + response.getCode());
+            }
         }
 
     }

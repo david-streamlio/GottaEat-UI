@@ -1,9 +1,11 @@
-package io.streamnative;
+package com.gottaeat.microservices;
 
-import io.streamnative.driver.DriverSimulatorThread;
+import com.gottaeat.microservices.driver.DriverSimulatorThread;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
+import javax.inject.Inject;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -24,11 +26,16 @@ public class DriverSimCommand implements Runnable {
             description = "The starting longitude for the drivers")
     String startingLon;
 
+    @Inject
+    @ConfigProperty(name = "location.webservice", defaultValue = "http://localhost:8080/location/driver")
+    String webServiceEndpoint;
+
     @Override
     public void run() {
-        System.out.printf("Hello %s, go go commando!\n", numberOfDrivers);
+        System.out.printf("Starting %s drivers!\n", numberOfDrivers);
         for (int idx = 0; idx < Integer.parseInt(numberOfDrivers); idx++) {
-            executor.submit(new DriverSimulatorThread(10000, idx,
+            executor.submit(new DriverSimulatorThread(webServiceEndpoint,
+                    10000, idx,
                     Float.parseFloat(startingLat),
                     Float.parseFloat(startingLon)));
         }
