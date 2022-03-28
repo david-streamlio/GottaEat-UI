@@ -1,7 +1,7 @@
 package com.gottaeat.microservices.location.driver.service;
 
+import com.gottaeat.commons.beans.PulsarBean;
 import com.gottaeat.microservices.common.beans.GridLookupBean;
-import com.gottaeat.microservices.common.beans.PulsarBean;
 import com.gottaeat.microservices.location.driver.domain.DriverLocation;
 import com.gottaeat.microservices.location.driver.domain.DriverPositionSignal;
 import org.apache.pulsar.client.api.*;

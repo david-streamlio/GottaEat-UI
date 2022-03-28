@@ -24,9 +24,9 @@
       <version>${quarkus.platform.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.pulsar</groupId>
-      <artifactId>pulsar-client</artifactId>
-      <version>${pulsar.version}</version>
+      <groupId>com.gottaeat</groupId>
+      <artifactId>driver-location-commons</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.uber</groupId>

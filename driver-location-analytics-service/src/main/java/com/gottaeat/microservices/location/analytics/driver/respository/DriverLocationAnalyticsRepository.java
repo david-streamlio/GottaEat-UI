@@ -1,10 +1,10 @@
 package com.gottaeat.microservices.location.analytics.driver.respository;
 
+import com.gottaeat.commons.beans.PulsarBean;
 import com.gottaeat.microservices.beans.CacheBean;
-import com.gottaeat.microservices.beans.PulsarBean;
-import com.gottaeat.microservices.location.analytics.driver.domain.DriverLocation;
 import com.gottaeat.microservices.location.analytics.driver.domain.LatLon;
 import com.gottaeat.microservices.location.analytics.driver.domain.LatLonCount;
+import com.gottaeat.microservices.location.driver.domain.DriverLocation;
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
 import org.apache.pulsar.client.api.*;

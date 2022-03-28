@@ -1,8 +1,7 @@
 package com.gottaeat.microservices.location.driver.repository;
 
-import com.gottaeat.microservices.common.beans.PulsarBean;
+import com.gottaeat.commons.beans.PulsarBean;
 import com.gottaeat.microservices.location.driver.domain.DriverLocation;
-import com.gottaeat.microservices.location.driver.domain.DriverPositionSignal;
 import io.quarkus.runtime.ShutdownEvent;
 import org.apache.pulsar.client.api.MessageId;
 import org.apache.pulsar.client.api.PulsarClientException;
@@ -17,7 +16,6 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

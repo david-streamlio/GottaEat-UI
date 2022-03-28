@@ -1,14 +1,11 @@
 package io.streamnative.driver;
 
-import io.streamnative.domain.DriverPositionSignal;
-// import okhttp3.*;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gottaeat.microservices.location.driver.domain.DriverPositionSignal;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.ContentType;
-import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.HttpResponse;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.slf4j.Logger;
