@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <!-- include leaflet css and javascript -->
+    <link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" crossorigin=""></script>
+
+    <style type="text/css">
+        #map {
+            height: 450px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="map"></div>
+
+<script type="text/javascript">
+
+    var map = null;
+    var marker = null;
+    var ws = new WebSocket("ws://" + location.host + "/tracking/drivers/1");
+
+    ws.onmessage = function(event) {
+        var driverLocation = JSON.parse(event.data);
+
+        if (map == null) {
+            map = L.map('map').setView([driverLocation.latitude, driverLocation.longitude], 14);
+            L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+        }
+
+        if (marker != null) {
+            map.removeLayer(marker);
+        }
+        marker = new L.marker([driverLocation.latitude, driverLocation.longitude]).addTo(map);
+    };
+
+    ws.onerror = function(event) {
+        console.log(`Error ${event}`);
+    }
+</script>
+</body>
+</html>
+
