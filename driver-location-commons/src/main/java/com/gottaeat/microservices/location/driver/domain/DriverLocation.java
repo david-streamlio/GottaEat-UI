@@ -3,7 +3,7 @@ package com.gottaeat.microservices.location.driver.domain;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class DriverLocation {
+public class DriverLocation implements Comparable<DriverLocation> {
 
     @NotNull
     public float latitude;
@@ -27,5 +27,10 @@ public class DriverLocation {
         this.longitude = signal.longitude;
         this.driverId = signal.driverId;
         this.timestamp = signal.timestamp;
+    }
+
+    @Override
+    public int compareTo(DriverLocation o) {
+        return Long.compare(this.timestamp, o.timestamp);
     }
 }
