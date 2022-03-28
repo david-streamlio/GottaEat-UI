@@ -1,9 +1,9 @@
 package com.gottaeat.microservices.tracking.driver.ws;
 
-import beans.PulsarBean;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gottaeat.microservices.tracking.driver.domain.DriverLocation;
+import com.gottaeat.commons.beans.PulsarBean;
+import com.gottaeat.microservices.location.driver.domain.DriverLocation;
 import org.apache.pulsar.client.api.*;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
