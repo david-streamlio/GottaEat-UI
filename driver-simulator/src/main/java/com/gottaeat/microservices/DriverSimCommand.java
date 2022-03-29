@@ -14,7 +14,7 @@ public class DriverSimCommand implements Runnable {
 
     ExecutorService executor =  Executors.newCachedThreadPool();
 
-    @Parameters(paramLabel = "<Number of Drivers>", defaultValue = "2",
+    @Parameters(paramLabel = "<Number of Drivers>", defaultValue = "5",
             description = "The number of drivers to simulate")
     String numberOfDrivers;
 
