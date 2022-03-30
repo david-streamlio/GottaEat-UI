@@ -30,10 +30,16 @@ public interface PulsarClientConfig {
 
     Optional<OAuth2> oauth2();
 
+    Optional<Jwt> jwt();
+
     interface OAuth2 {
-        Optional<String> issuerUrl();
-        Optional<String> credentialsUrl();
-        Optional<String> audience();
+        String issuerUrl();
+        String credentialsUrl();
+        String audience();
+    }
+
+    interface Jwt {
+        String token();
     }
 }
 

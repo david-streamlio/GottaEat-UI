@@ -2,6 +2,7 @@ package com.gottaeat.commons.beans;
 
 import io.quarkus.runtime.StartupEvent;
 import org.apache.pulsar.client.api.Authentication;
+import org.apache.pulsar.client.api.AuthenticationFactory;
 import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.PulsarClientException;
 import org.apache.pulsar.client.impl.auth.oauth2.AuthenticationFactoryOAuth2;
@@ -59,15 +60,18 @@ public class PulsarBean {
         if (config.oauth2().isPresent()) {
             PulsarClientConfig.OAuth2 authConfig = config.oauth2().get();
             try {
-                URL issuerUrl = new URL(authConfig.issuerUrl().get());
-                URL credentialsUrl = new URL(authConfig.credentialsUrl().get());
+                URL issuerUrl = new URL(authConfig.issuerUrl());
+                URL credentialsUrl = new URL(authConfig.credentialsUrl());
                 auth = AuthenticationFactoryOAuth2.clientCredentials(issuerUrl,
-                        credentialsUrl, authConfig.audience().get());
+                        credentialsUrl, authConfig.audience());
 
             } catch(MalformedURLException e) {
                 LOGGER.error("Bad security credentials provided", e);
             }
-        } // else if ... other authentication type, etc.
+        } else if (config.jwt().isPresent()) {
+            auth = AuthenticationFactory.token(config.jwt().get().token());
+        }
+
         return auth;
     }
 
