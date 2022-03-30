@@ -20,6 +20,9 @@ public class CacheBean {
     private Cache<Long, LatLon> cache;
 
     public Cache<Long, LatLon> getCache() {
+        if (this.cache == null) {
+            createCache();
+        }
         return this.cache;
     }
 
