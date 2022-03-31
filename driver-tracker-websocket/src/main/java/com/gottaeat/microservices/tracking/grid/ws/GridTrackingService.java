@@ -1,8 +1,10 @@
-package com.gottaeat.microservices.tracking.driver.ws;
+package com.gottaeat.microservices.tracking.grid.ws;
 
 import com.gottaeat.microservices.location.driver.domain.DriverLocation;
 import com.gottaeat.microservices.tracking.AbstractTrackingService;
-import org.apache.pulsar.client.api.*;
+
+import org.apache.pulsar.client.api.MessageListener;
+import org.apache.pulsar.client.api.PulsarClientException;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 
@@ -15,24 +17,24 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
 
-@ServerEndpoint("/tracking/drivers/{driverId}")
+@ServerEndpoint("/tracking/grid/{gridId}")
 @ApplicationScoped
-public class DriverTrackingService extends AbstractTrackingService {
+public class GridTrackingService extends AbstractTrackingService {
 
-    private static final Logger LOGGER = Logger.getLogger(DriverTrackingService.class);
+    private static final Logger LOGGER = Logger.getLogger(GridTrackingService.class);
 
     @Inject
-    @ConfigProperty(name = "driver-tracking-service.subscription-name", defaultValue = "driver-tracking")
+    @ConfigProperty(name = "grid-tracking-service.subscription-name", defaultValue = "grid-tracking")
     String subscriptionName;
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("driverId") String driverId) {
-       super.handleOnOpen(session, driverId);
+    public void onOpen(Session session, @PathParam("gridId") String gridId) {
+        super.handleOnOpen(session, gridId);
     }
 
     @OnClose
-    public void onClose(Session session, @PathParam("driverId") String driverId) {
-       super.handleOnClose(session, driverId);
+    public void onClose(Session session, @PathParam("gridId") String gridId) {
+        super.handleOnClose(session, gridId);
     }
 
     @Override
@@ -41,17 +43,18 @@ public class DriverTrackingService extends AbstractTrackingService {
     }
 
     /**
-     * In this case we use the message key, which we know is the driver id, to
+     * In this case we use the gridId field of message itself to
      * notify all the subscribers on the websocket.
      *
-     * SELECT * from dls.topic where driverId = ?
+     * SELECT * from dls.topic where gridId = ?
      */
     @Override
     protected MessageListener<DriverLocation> getMessageListener() {
         MessageListener<DriverLocation> listener = (consumer, msg) -> {
             try {
-                if (sessions.containsKey(msg.getKey())) {
-                    notify(msg.getKey(), msg.getValue());
+                String key = msg.getValue().gridId;
+                if (sessions.containsKey(key)) {
+                    notify(key, msg.getValue());
                 }
                 consumer.acknowledge(msg);
             } catch (PulsarClientException e) {
