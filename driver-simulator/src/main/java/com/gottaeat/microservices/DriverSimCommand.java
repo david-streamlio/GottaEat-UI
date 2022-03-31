@@ -14,7 +14,7 @@ public class DriverSimCommand implements Runnable {
 
     ExecutorService executor =  Executors.newCachedThreadPool();
 
-    @Parameters(paramLabel = "<Number of Drivers>", defaultValue = "5",
+    @Parameters(paramLabel = "<Number of Drivers>", defaultValue = "8",
             description = "The number of drivers to simulate")
     String numberOfDrivers;
 
@@ -34,10 +34,16 @@ public class DriverSimCommand implements Runnable {
     public void run() {
         System.out.printf("Starting %s drivers!\n", numberOfDrivers);
         for (int idx = 0; idx < Integer.parseInt(numberOfDrivers); idx++) {
+
             executor.submit(new DriverSimulatorThread(webServiceEndpoint,
                     10000, idx,
                     Float.parseFloat(startingLat),
                     Float.parseFloat(startingLon)));
+            try {
+                Thread.sleep(1000);  // Stagger the threads.
+            } catch (final InterruptedException e) {
+
+            }
         }
     }
 
