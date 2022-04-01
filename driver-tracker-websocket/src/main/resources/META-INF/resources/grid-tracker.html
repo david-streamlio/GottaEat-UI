@@ -20,8 +20,19 @@
 
 <script type="text/javascript">
 
+    const customerIcon =  L.icon({
+        iconUrl: "./images/blue-dot.png",
+        className: "image-icon",
+        iconSize: [20, 20]
+    });
+
+    const carIcon = L.icon({
+        iconUrl: "./images/car-icon-side-9.jpeg",
+        className: "image-icon",
+        iconSize: [30, 30]
+    });
+
     var map = null;
-    var marker = null;
     let markerHashMap = new Map()
     var ws = new WebSocket("ws://" + location.host + "/tracking/grid/86275925fffffff");
 
@@ -33,12 +44,14 @@
             L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
+
+            let marker = new L.marker([driverLocation.latitude, driverLocation.longitude], { icon: customerIcon }).addTo(map);
         }
 
         if (markerHashMap.get(driverLocation.driverId) != null) {
             map.removeLayer(markerHashMap.get(driverLocation.driverId));
         }
-        marker = new L.marker([driverLocation.latitude, driverLocation.longitude]).addTo(map);
+        let marker = new L.marker([driverLocation.latitude, driverLocation.longitude], { icon: carIcon }).addTo(map);
         markerHashMap.set(driverLocation.driverId, marker);
     };
 
