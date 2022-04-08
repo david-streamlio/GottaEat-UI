@@ -16,10 +16,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Reconstruct every 5 minutes or expire old position data either periodically
@@ -40,6 +37,8 @@ public class DriverLocationAnalyticsRepository {
     @Inject
     CacheBean cache;
 
+    private Set<String> gridIds = new HashSet<String>();
+
     @Inject
     @ConfigProperty(name = "dl.topic", defaultValue = "persistent://public/default/driverLocation")
     String topic;
@@ -53,6 +52,14 @@ public class DriverLocationAnalyticsRepository {
 
     public List<LatLonCount> getHeatMapByGridId(String gridId) {
         return null;
+    }
+
+    /**
+     *
+     * @return All the grid ids in which vehicles are currently operating.
+     */
+    public Set<String> getGrids() {
+        return gridIds;
     }
 
     /**
@@ -72,6 +79,8 @@ public class DriverLocationAnalyticsRepository {
                 Message<DriverLocation> msg = getReader().readNext();
                 cache.getCache().put(msg.getValue().driverId,
                         new LatLon(msg.getValue().latitude, msg.getValue().longitude));
+
+                this.gridIds.add(msg.getValue().gridId);
             }
 
             // Start the consumer
@@ -142,6 +151,9 @@ public class DriverLocationAnalyticsRepository {
                             cache.getCache().put(msg.getValue().driverId,
                                     new LatLon(msg.getValue().latitude, msg.getValue().longitude));
                             con.acknowledge(msg);
+
+                            this.gridIds.add(msg.getValue().gridId);
+
                         } catch (PulsarClientException e) {
                             LOGGER.error("Can't process message", e);
                         }
