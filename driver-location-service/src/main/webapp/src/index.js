@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import '@patternfly/patternfly/patternfly.css';
-import App from './App';
+import DriverLocations from "./components/DriverLocations";
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <h1 align={"center"}>Driver Locations</h1>
+      <br/>
+    <DriverLocations />
   </React.StrictMode>,
   document.getElementById('root')
 );

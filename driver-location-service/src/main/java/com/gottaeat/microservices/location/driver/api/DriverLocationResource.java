@@ -32,6 +32,13 @@ public class DriverLocationResource {
     }
 
     @GET
+    @Path("/currentLocations")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<DriverLocation> getCurrentLocations() {
+        return repository.currentLocations();
+    }
+
+    @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<DriverLocation> list() {
         List<DriverLocation> locations = repository.list();
