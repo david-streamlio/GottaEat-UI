@@ -21,6 +21,7 @@
     <quarkus.platform.version>2.7.5.Final</quarkus.platform.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <pulsar.version>2.9.1</pulsar.version>
+    <uber.h3.version>3.7.2</uber.h3.version>
   </properties>
 
   <packaging>pom</packaging>
