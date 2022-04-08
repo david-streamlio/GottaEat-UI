@@ -3,7 +3,6 @@ import React from 'react'
 const Locations = ({ locations }) => {
     return (
         <div>
-            <center><h1>Driver Locations</h1></center>
             <table class="pf-c-table pf-m-grid-md" role="grid" aria-label="Driver Location Information" id="table-basic">
                 <thead>
                 <tr role="row">
