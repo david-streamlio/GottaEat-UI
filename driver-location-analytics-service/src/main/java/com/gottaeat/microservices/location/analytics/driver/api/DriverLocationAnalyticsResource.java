@@ -27,12 +27,6 @@ public class DriverLocationAnalyticsResource {
     DriverLocationAnalyticsRepository repository;
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public List<LatLonCount> getHeatMap() {
-        return repository.getHeatMap();
-    }
-
-    @GET
     @Path("/geojson")
     @Produces({MediaType.APPLICATION_JSON})
     public FeatureCollection getGeo() throws IOException {
@@ -40,7 +34,7 @@ public class DriverLocationAnalyticsResource {
     }
 
     @GET
-    @Path("/{gridId}")
+    @Path("/geojson/{gridId}")
     @Produces({MediaType.APPLICATION_JSON})
     public FeatureCollection getHeatMapByGridId(@PathParam("gridId") String gridId) {
         return H3Utils.h3SetToFeatureCollection(new String[]{gridId});

@@ -37,3 +37,12 @@ nb-configuration.xml
 
 # Local environment
 .env
+/driver-location-service/src/main/resources/META-INF/resources/static/
+/driver-location-service/src/main/resources/META-INF/resources/asset-manifest.json
+/driver-location-service/src/main/resources/META-INF/resources/favicon.ico
+/driver-location-service/src/main/resources/META-INF/resources/index.html
+/driver-location-service/src/main/resources/META-INF/resources/logo192.png
+/driver-location-service/src/main/resources/META-INF/resources/logo512.png
+/driver-location-service/src/main/resources/META-INF/resources/manifest.json
+/driver-location-service/src/main/resources/META-INF/resources/robots.txt
+/driver-location-analytics-service/src/main/resources/META-INF/resources/static/

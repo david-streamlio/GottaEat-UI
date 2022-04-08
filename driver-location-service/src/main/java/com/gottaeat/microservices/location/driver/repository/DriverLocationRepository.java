@@ -69,5 +69,4 @@ public class DriverLocationRepository {
         }
         return reader;
     }
-
 }

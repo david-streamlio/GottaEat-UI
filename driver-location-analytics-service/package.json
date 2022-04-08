@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "geojson2h3": "^1.2.0",
-    "heatmap.js": "^2.0.5",
-    "leaflet": "^1.7.1",
-    "react-leaflet": "^3.2.5"
-  }
-}
