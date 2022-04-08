@@ -4,14 +4,16 @@ User interface components for the GottaEat food delivery service application. Th
 ##How To Run
 In order to run the demo you need to execute the following steps:
 
-1. Start the **driver-location-service** by changing into that module's subdirectory and running the following command: 
+1. Update the Pulsar OAuth2 credentials file in ***ALL*** of the <code>/src/main/resources/META-INF/application.properties</code> files. Replace the value of the <code>pulsar.oauth2.credentials-url</code> property to point to your local OAuth2 credentials file that you downloaded from the SN Cloud.
+
+2. Start the **driver-location-service** by changing into that module's subdirectory and running the following command: 
 
 	<code>"mvn clean compile quarkus:dev"</code>
    
 	This will start the web service, and you can verify that it is running by visiting [http://localhost:8080/index.html]() 
 
 
-2. Next, you should start the **driver-simulator** by changing into that module's subdirectory and running the following command: 
+3. Next, you should start the **driver-simulator** by changing into that module's subdirectory and running the following command: 
 
 	<code>"mvn clean compile quarkus:dev"</code>
 	
@@ -22,7 +24,7 @@ In order to run the demo you need to execute the following steps:
    You can verify that this service is running by refreshing the [http://localhost:8080/index.html]() page to confirm new records are showing up based on the timestamps.
 
 
-3. You can then start the **driver-tracker-websocket** service that provides real-time updates of the driver position by changing into that module's subdirectory and running the following command: 
+4. You can then start the **driver-tracker-websocket** service that provides real-time updates of the driver position by changing into that module's subdirectory and running the following command: 
 
 	<code>"mvn clean compile quarkus:dev"</code>
 	
@@ -32,7 +34,7 @@ In order to run the demo you need to execute the following steps:
    Or if you want to see all the drivers in a current geographical area, then you can visit [http://localhost:8005/grid-tracker.html]() 
 
 
-4. Finally, you can start the **driver-location-analytics-service** by first changing into that module's subdirectory and running the following command: 
+5. Finally, you can start the **driver-location-analytics-service** by first changing into that module's subdirectory and running the following command: 
 
 	<code>"mvn clean compile quarkus:dev"</code>
 	
@@ -42,3 +44,7 @@ In order to run the demo you need to execute the following steps:
 
 
 
+## References
+* [How to add Patternfly components to Quarkus](https://quarkus.io/blog/gui-react-patternfly/)
+* [React Leaflet Documentation](https://react-leaflet.js.org/)
+* [Leaflet Documentation](https://leafletjs.com/SlavaUkraini/reference.html#map-event)
