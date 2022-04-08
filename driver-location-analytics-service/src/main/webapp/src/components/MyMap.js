@@ -1,5 +1,5 @@
 import React, {forwardRef, useEffect, useRef, useState} from 'react';
-import {MapContainer, GeoJSON, TileLayer, useMapEvents, useMapEvent} from "react-leaflet";
+import {MapContainer, GeoJSON, TileLayer, useMapEvents} from "react-leaflet";
 import axios from 'axios'
 import "leaflet/dist/leaflet.css";
 import "./MyMap.css";
