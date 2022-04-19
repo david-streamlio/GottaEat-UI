@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-      <h1 align={"center"}>My Map</h1>
+      <h1 align={"center"}>Driver Heatmap</h1>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
